@@ -57,3 +57,18 @@ The project is well-tested with:
 1. Clone the repository:
    ```bash
    git clone https://github.com/JakkulaMahendhar/gallery_app.git
+   
+2. Open in Android Studio
+3. Build the project and run on an emulator or real device.
+
+- 🧑‍💻 Developer Notes
+    - Minimum SDK: 24
+    - Target SDK: 35
+    - Language: Kotlin
+    - Architecture: Clean Architecture with MVVM pattern
+    - Dependency Injection: Dagger Hilt
+    - Media Handling:
+     - Glide for image loading
+     - ExoPlayer for video playback
+     - Async Programming: Coroutines and Kotlin Flows used for reactive data handling
+    - Testing Frameworks: JUnit, Mockito, Robolectric
