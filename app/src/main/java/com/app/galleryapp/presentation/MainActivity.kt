@@ -6,25 +6,27 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.viewModels
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import androidx.core.content.ContextCompat
+import com.app.galleryapp.presentation.screens.gallery.GalleryScreen
 import com.app.galleryapp.presentation.ui.theme.CustomGalleryTheme
+import com.app.galleryapp.presentation.screens.gallery.GalleryViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
-
-    //TODO create a viewmodel object here
+    private val galleryViewModel: GalleryViewModel by viewModels()
 
     private val requestPermissionLauncher = registerForActivityResult(
         ActivityResultContracts.RequestMultiplePermissions()
     ) { permissions ->
         val allGranted = permissions.entries.all { it.value }
         if (allGranted) {
-            //TODO load albums from viewmodel
+            galleryViewModel.loadAlbums()
         }
     }
 
@@ -39,7 +41,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    // TODO call the gallery screen with viewmodel param
+                    GalleryScreen(galleryViewModel)
                 }
             }
         }
@@ -63,7 +65,7 @@ class MainActivity : ComponentActivity() {
         if (permissions.all {
                 ContextCompat.checkSelfPermission(this, it) == PackageManager.PERMISSION_GRANTED
             }) {
-            //TODO load the albums from viewmodel
+            galleryViewModel.loadAlbums()
         } else {
             requestPermissionLauncher.launch(permissions)
         }
